@@ -1,0 +1,29 @@
+version: 2
+sources:
+  - name: raw
+    description: "Dados brutos publicados pela ingestão em DuckDB."
+    schema: main
+    tables:
+      - name: raw_matches
+        description: "Resultados concluídos e partidas futuras do CSV da football-data.co.uk."
+        columns:
+          - name: match_id
+            tests: [not_null, unique]
+          - name: season
+            tests: [not_null]
+          - name: league
+            tests: [not_null]
+          - name: match_date
+            tests: [not_null]
+      - name: raw_relegation_estimates
+        description: "Snapshots append-only da simulação Monte Carlo."
+        columns:
+          - name: estimate_id
+            tests: [not_null, unique]
+      - name: raw_brazil_historical_matches
+        description: "Resultados finais das cinco edições completas anteriores do Brasileirão Série A."
+        columns:
+          - name: match_id
+            tests: [not_null, unique]
+          - name: season
+            tests: [not_null]

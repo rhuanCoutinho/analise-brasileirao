@@ -1,0 +1,64 @@
+version: 2
+models:
+  - name: stg_matches
+    description: "Normaliza nomes, datas e status dos jogos recebidos do CSV original."
+    columns:
+      - name: match_id
+        tests: [not_null, unique]
+      - name: match_status
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['finished', 'scheduled']
+      - name: home_team
+        tests: [not_null]
+  - name: int_team_match_results
+    description: "Uma linha por time e partida finalizada; traduz placar em pontos."
+    columns:
+      - name: match_id
+        tests: [not_null]
+      - name: points
+        tests:
+          - accepted_values:
+              arguments:
+                values: [0, 1, 3]
+  - name: mart_current_standings
+    description: "Classificação derivada exclusivamente dos resultados finalizados."
+    columns:
+      - name: team
+        tests: [not_null]
+      - name: position
+        tests: [not_null]
+  - name: mart_remaining_fixtures
+    description: "Partidas sem placar final, em formato de uma linha por time envolvido."
+    columns:
+      - name: match_id
+        tests: [not_null]
+      - name: team
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('mart_current_standings')
+                field: team
+  - name: mart_relegation_estimates
+    description: "Snapshots Monte Carlo auditáveis; uma probabilidade por time e execução."
+    columns:
+      - name: estimate_id
+        tests: [not_null]
+      - name: relegation_probability
+        tests: [not_null]
+  - name: mart_historical_relegation_thresholds
+    description: "Pontos do 16º (último salvo) e 17º (último rebaixado) nas edições completas 2021–2025."
+    columns:
+      - name: season
+        tests: [not_null, unique]
+      - name: last_safe_points
+        tests: [not_null]
+      - name: last_relegated_points
+        tests: [not_null]
+  - name: mart_historical_relegated_teams
+    description: "Os quatro clubes rebaixados e seus pontos em cada edição completa de 2021–2025."
+    columns:
+      - name: relegated_team
+        tests: [not_null]

@@ -1,0 +1,19 @@
+name: relegation_analytics
+version: '1.0.0'
+config-version: 2
+profile: relegation_analytics
+model-paths: [models]
+test-paths: [tests]
+clean-targets: [target, dbt_packages]
+
+models:
+  relegation_analytics:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+
+vars:
+  relegation_spots: 3

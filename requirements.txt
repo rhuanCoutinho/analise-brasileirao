@@ -1,0 +1,16 @@
+duckdb>=1.1,<2
+dbt-core>=1.10,<2
+dbt-duckdb>=1.10,<2
+fastapi>=0.115,<1
+uvicorn[standard]>=0.30,<1
+pydantic>=2.8,<3
+redis>=5,<7
+rq>=2,<3
+prometheus-client>=0.20,<1
+requests>=2.32,<3
+numpy>=1.26,<3
+pandas>=2.2,<3
+python-dotenv>=1.0,<2
+jupyterlab>=4.2,<5
+ipykernel>=6.29,<7
+plotly>=5.24,<7
