@@ -77,7 +77,21 @@ Temporada, limite e offset são validados; respostas têm estrutura `items/limit
 
 ## 4. Notebook de exploração e apresentação
 
-`notebooks/bra_2026_analise.ipynb` é a única interface de visualização. Documenta a limpeza do CSV, refaz a tabela para conferi-la com dbt e inclui gráficos Plotly interativos de risco, pontos atuais, cortes históricos, quatro rebaixados e evolução dos snapshots. O notebook consome `BRA.csv` e o DuckDB criado pelo pipeline, sem depender da API para renderizar.
+`notebooks/bra_2026_analise.ipynb` é a única interface de visualização. Documenta a limpeza do CSV, refaz a tabela para conferi-la com dbt e inclui gráficos Plotly interativos de risco, pontos atuais, cortes históricos, quatro rebaixados e evolução dos snapshots. O notebook consome `BRA.csv` e o DuckDB criado pelo pipeline, sem depender da API para renderizar. A última seção exporta um PDF de cinco páginas e PNGs em `reports/linkedin/` para carrossel no LinkedIn; a plataforma não executa gráficos interativos embutidos em notebooks.
+
+### Gráficos
+
+O GitHub não renderiza os gráficos Plotly interativos do notebook. Estas versões estáticas podem ser visualizadas diretamente nesta página:
+
+| Maiores riscos estimados | Cortes históricos |
+| --- | --- |
+| <img src="reports/linkedin/02_maiores_riscos.png" alt="Gráfico dos times com maior risco estimado de rebaixamento" width="400"> | <img src="reports/linkedin/03_cortes_historicos.png" alt="Gráfico dos cortes históricos de pontos" width="400"> |
+
+| Pontos dos rebaixados | Pontos atuais vs. referência |
+| --- | --- |
+| <img src="reports/linkedin/04_pontos_rebaixados.png" alt="Gráfico de pontos dos times rebaixados" width="400"> | <img src="reports/linkedin/05_pontos_vs_referencia.png" alt="Gráfico de pontos atuais comparados à referência histórica" width="400"> |
+
+[Ver a capa do carrossel](reports/linkedin/01_capa.png) · [Baixar o carrossel completo em PDF](reports/linkedin/brasileirao_2026_carrossel.pdf)
 
 ## Executar localmente
 
